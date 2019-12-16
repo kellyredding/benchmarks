@@ -1,10 +1,13 @@
+require "whysoslow"
 require "benchmarks/version"
 require "benchmarks/cli/clirb"
 require "benchmarks/cli/command_set"
 require "benchmarks/cli/invalid_command"
 require "benchmarks/cli/valid_command_behaviors"
 
-require "benchmarks/cli/commands"
+require "benchmarks/cli/commands/compact_map"
+require "benchmarks/cli/commands/chain_map_compact"
+require "benchmarks/cli/commands/chain_map_bang_compact_bang"
 
 module Benchmarks
 
@@ -13,7 +16,9 @@ module Benchmarks
     CommandExitError    = Class.new(RuntimeError)
 
     COMMANDS = CommandSet.new{ |unknown| InvalidCommand.new(unknown) }.tap do |c|
-      # c.add(GenerateCommand, "generate", "g")
+      c.add(Commands::CompactMap, "compact-map")
+      c.add(Commands::ChainMapCompact, "chain-map-compact")
+      c.add(Commands::ChainMapBangCompactBang, "chain-map-bang-compact-bang")
     end
 
     def self.run(args)
