@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+#
+# Copyright (c) 2019-Present Kelly Redding
+#
+
+require "pathname"
+ROOT_PATH = Pathname.new(File.expand_path("../..", __FILE__))
+$LOAD_PATH.unshift(ROOT_PATH.join("lib").to_s)
+
+require "benchmarks/cli"
+Benchmarks::CLI.run ARGV
