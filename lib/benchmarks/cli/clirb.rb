@@ -51,8 +51,7 @@ class Benchmarks::CLI
           custom_abbrev || processed_name.gsub(/[^a-z]/, "").chars.first || "a"
         ]
       end
-      def gvalinfo(v); v.kind_of?(Class) ? [nil,gklass(v)] : [v,gklass(v.class)]; end
-      def gklass(k); k == Fixnum ? Integer : k; end
+      def gvalinfo(v); v.kind_of?(Class) ? [nil,v] : [v,v.class]; end
     end
   end
 
