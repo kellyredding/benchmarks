@@ -1,28 +1,18 @@
-require "benchmarks/cli/valid_command_behaviors"
+require "benchmarks/cli/compact_map_command_behaviors"
 
 module Benchmarks; end
 class Benchmarks::CLI; end
 module Benchmarks::CLI::Commands
 
   class ChainMapCompact
-    include Benchmarks::CLI::ValidCommandBehaviors
+    include Benchmarks::CLI::CompactMapCommandBehaviors
 
-    def run(argv, *args)
-      super
+    def algorithm_title
+      "items.map{ |e| e.to_s if e }.compact"
+    end
 
-      begin
-        require "whysoslow"
-
-        printer = ::Whysoslow::DefaultPrinter.new({
-          :title => "Chain Map Compact",
-          :verbose => true
-        })
-        runner = Whysoslow::Runner.new(printer)
-
-        runner.run do
-          (1..10_000_000).to_a.map(&:to_s).compact
-        end
-      end
+    def algorithm
+      ->(items) { items.map{ |e| e.to_s if e }.compact }
     end
 
     def summary

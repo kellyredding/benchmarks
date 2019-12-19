@@ -1,5 +1,6 @@
-require "benchmarks/cli/clirb"
 require "much-plugin"
+
+require "benchmarks/cli/clirb"
 
 module Benchmarks; end
 class Benchmarks::CLI
